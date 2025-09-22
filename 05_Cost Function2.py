@@ -21,38 +21,64 @@
 
 # # تست: خط درست (y=2x)
 # print("Cost when θ0=2, θ1=3:", cost_function(x, y, 2, 3))
+# import numpy as np
+# import matplotlib.pyplot as plt
+
+# # Data (x = size in m², y = price in million Toman)
+# x = np.array([50, 60, 70, 80, 90])
+# y = np.array([150, 180, 210, 240, 270])
+
+# # Model parameters
+# # theta0 عرض از مبدا
+# # theta1 شیب
+# theta0 = 0
+# theta1 = 3
+
+# def compute_cost(x, y, theta0, theta1):
+#     m = len(y)
+#     predictions = theta0 + theta1 * x
+#     errors = predictions - y
+#     cost = (1 / (2 * m)) * np.sum(errors ** 2)
+#     return cost
+
+# # Compute cost
+# print("Model cost:", compute_cost(x, y, theta0, theta1))
+
+# # Predictions
+# predictions = theta0 + theta1 * x
+
+# # Plot
+# plt.scatter(x, y, color="red", label="Actual data")   # Real data
+# plt.plot(x, predictions, color="blue", label="Model line")   # Model line
+# plt.xlabel("Size (m²)")
+# plt.ylabel("Price (Million Toman)")
+# plt.title("Linear Regression - Size vs Price")
+# plt.legend()
+# plt.grid(True)
+# plt.show()
+
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Data (x = size in m², y = price in million Toman)
+# Data (x = size, y = price)
 x = np.array([50, 60, 70, 80, 90])
 y = np.array([150, 180, 210, 240, 270])
 
-# Model parameters
-# theta0 عرض از مبدا
-# theta1 شیب
-theta0 = 0
-theta1 = 3
+# Different theta0 and theta1 to test
+theta0_values = [0, 50, -100]   # intercepts
+theta1_values = [2, 3, 4]       # slopes
 
-def compute_cost(x, y, theta0, theta1):
-    m = len(y)
-    predictions = theta0 + theta1 * x
-    errors = predictions - y
-    cost = (1 / (2 * m)) * np.sum(errors ** 2)
-    return cost
+plt.scatter(x, y, color="red", label="Actual data")
 
-# Compute cost
-print("Model cost:", compute_cost(x, y, theta0, theta1))
+# Try different lines
+for t0 in theta0_values:
+    for t1 in theta1_values:
+        predictions = t0 + t1 * x
+        plt.plot(x, predictions, label=f"θ0={t0}, θ1={t1}")
 
-# Predictions
-predictions = theta0 + theta1 * x
-
-# Plot
-plt.scatter(x, y, color="red", label="Actual data")   # Real data
-plt.plot(x, predictions, color="blue", label="Model line")   # Model line
 plt.xlabel("Size (m²)")
 plt.ylabel("Price (Million Toman)")
-plt.title("Linear Regression - Size vs Price")
+plt.title("Effect of θ0 and θ1")
 plt.legend()
 plt.grid(True)
 plt.show()
