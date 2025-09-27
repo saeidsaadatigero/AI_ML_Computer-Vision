@@ -65,7 +65,8 @@ print(f"Test Accuracy: {100 * correct / total:.2f}%")
 
 # --- 7. نمایش چند نمونه پیش‌بینی ---
 dataiter = iter(test_loader)
-images, labels = dataiter.next()
+images, labels = next(dataiter)   # ✅ تغییر داده شد
+
 outputs = model(images)
 _, preds = torch.max(outputs, 1)
 
@@ -75,3 +76,4 @@ for i, ax in enumerate(axes.flatten()):
     ax.set_title(f"Pred: {preds[i].item()}\nTrue: {labels[i].item()}")
     ax.axis('off')
 plt.show()
+
